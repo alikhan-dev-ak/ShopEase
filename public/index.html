@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101b2d">
+  <title>ShopEase — Discover more</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="#" onclick="view('shop');return false"><span class="logo-mark">S</span> ShopEase<span class="dot">.</span></a>
+  <nav class="main-nav">
+    <button class="nav-link active" onclick="view('shop')">Home</button>
+    <button class="nav-link" onclick="view('orders')">My Orders</button>
+    <button id="admin-link" class="nav-link hide" onclick="view('admin')">Admin</button>
+  </nav>
+  <div class="header-actions">
+    <span id="welcome" class="welcome"></span>
+    <button id="cart-open" class="cart-button">Cart <span id="count" class="cart-count">0</span></button>
+    <button id="login-open" class="button button-light">Login</button>
+    <button id="logout" class="button button-light hide">Logout</button>
+  </div>
+</header>
+
+<main>
+  <section id="shop" class="page">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="pulse-dot"></span> YOUR EVERYDAY SHOPPING DESTINATION</span>
+        <h1>Find your next<br><span>favourite thing.</span></h1>
+        <p>Thoughtful picks, great value and a smooth shopping experience — all in one place.</p>
+        <button class="button button-primary" onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">Explore products <span>→</span></button>
+        <div class="hero-perks"><span>✓ Easy ordering</span><span>✓ Cash on delivery</span><span>✓ Order tracking</span></div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+        <div class="hero-tile tile-back">SHOP<br><b>SMART</b></div>
+        <div class="hero-tile tile-front"><span class="tile-spark">✦</span><strong>Good finds.<br>Great days.</strong><small>DISCOVER SOMETHING NEW</small></div>
+        <span class="float-star star-one">✦</span><span class="float-star star-two">✧</span>
+      </div>
+    </section>
+
+    <section class="owner-strip">
+      
+      
+      <div><span class="eyebrow">A PERSONAL TOUCH</span><h2>Welcome to ShopEase</h2><p>A simple and convenient place to discover products you love.</p></div>
+      <span class="owner-tag">Your trusted shopping space</span>
+    </section>
+
+    <section class="products-section">
+      <div class="section-heading">
+        <div><span class="eyebrow">THE COLLECTION</span><h2>Explore our products</h2><p>Find something useful, stylish and just right for you.</p></div>
+        <div class="filters"><input id="search" placeholder="Search products..." aria-label="Search products"><select id="category"><option value="">All categories</option></select></div>
+      </div>
+      <div id="products" class="grid"></div>
+    </section>
+    <section class="bottom-promo"><div><span class="eyebrow">SHOP WITH CONFIDENCE</span><h2>Your order, your way.</h2><p>Place an order in a few easy steps and follow its progress from your account.</p></div><button class="button button-primary" onclick="view('orders')">Track my order →</button></section>
+  </section>
+
+  <section id="orders" class="page hide">
+    <div class="page-title"><span class="eyebrow">YOUR ACCOUNT</span><h1>My orders</h1><p>See your purchases and check the latest delivery status.</p></div>
+    <div id="my-orders" class="orders-list"></div>
+  </section>
+
+  <section id="admin" class="page hide">
+    <div class="page-title"><span class="eyebrow">STORE MANAGEMENT</span><h1>Admin dashboard</h1></div>
+    <div id="stats" class="stats"></div>
+    <div class="columns">
+      <div class="panel"><h3 id="form-title">Add product</h3><form id="product-form"><input type="hidden" id="pid"><label>Product name<input id="pname" required></label><label>Category<select id="pcat"></select></label><label>Price (PKR)<input id="price" type="number" min="0" step=".01" required></label><label>Stock<input id="stock" type="number" min="0" required></label><label>Image URL<input id="image"></label><label>Description<textarea id="description"></textarea></label><button class="button button-primary">Save product</button><button type="button" id="clear" class="button button-light">Clear</button></form></div>
+      <div class="panel"><h3>Orders</h3><div id="admin-orders"></div></div>
+    </div>
+    <div class="panel"><h3>Inventory</h3><div id="inventory"></div></div><div class="panel"><h3>Customers</h3><div id="customers"></div></div><div class="panel"><h3>Sales report</h3><div id="sales"></div></div>
+  </section>
+</main>
+
+<footer><div class="footer-brand">ShopEase<span>.</span></div><p>Discover more. Shop with ease.</p><small>© <span id="year"></span> ShopEase. All rights reserved.</small></footer>
+
+<div id="auth" class="overlay hide"><div class="modal auth-modal"><button class="x" data-close="auth">×</button><div class="modal-kicker">WELCOME TO SHopease</div><div class="tabs"><button id="tab-login" class="tab active">Login</button><button id="tab-register" class="tab">Create account</button></div>
+  <form id="login-form"><h2>Welcome back</h2><p class="muted">Login to manage your shopping and orders.</p><label>Email<input id="email" type="email" required autocomplete="email"></label><label>Password<div class="password-wrap"><input id="password" type="password" required autocomplete="current-password"><button type="button" class="eye-button" data-toggle-password="password" aria-label="Show password">◉</button></div></label><button class="button button-primary full">Login</button></form>
+  <form id="register-form" class="hide"><h2>Create your account</h2><p class="muted">A few details and you are ready to shop.</p><label>Full name<input id="rname" required autocomplete="name"></label><label>Email<input id="remail" type="email" required autocomplete="email"></label><label>Password (minimum 8 characters)<div class="password-wrap"><input id="rpassword" type="password" minlength="8" required autocomplete="new-password"><button type="button" class="eye-button" data-toggle-password="rpassword" aria-label="Show password">◉</button></div></label><label>Phone<input id="phone" autocomplete="tel"></label><label>Address<input id="address" autocomplete="street-address"></label><button class="button button-primary full">Create account</button></form>
+</div></div>
+
+<div id="product-modal" class="overlay hide"><div class="modal product-modal"><button class="x" data-close="product-modal">×</button><div id="product-detail"></div></div></div>
+<div id="cart" class="drawer hide"><button class="x" id="cart-close">×</button><span class="eyebrow">YOUR SELECTION</span><h2>Your cart</h2><div id="cart-items"></div><h3 id="total">PKR 0</h3><button id="checkout" class="button button-primary full">Continue to checkout</button></div>
+<div id="checkout-modal" class="overlay hide"><div class="modal"><button class="x" data-close="checkout-modal">×</button><span class="eyebrow">ALMOST THERE</span><h2>Delivery details</h2><p class="muted">Where should we send your order?</p><form id="checkout-form"><label>Full name<input id="sname" required></label><label>Phone number<input id="sphone" type="tel" required></label><label>Email<input id="semail" type="email"></label><label>City<input id="scity" required></label><label>Complete delivery address<textarea id="saddress" required></textarea></label><p class="payment-note">Payment method: <b>Cash on Delivery</b></p><button class="button button-primary full">Place order</button></form></div></div>
+<div id="toast"></div>
+<script src="app.js"></script>
+</body></html>
